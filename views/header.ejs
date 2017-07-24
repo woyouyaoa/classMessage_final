@@ -1,0 +1,35 @@
+<!--这个页面是共享的导航头,所有页面都要引入这个页面-->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">web1703班级留言本</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li <%if(active=="shouye"){%>class="active"<%}%>><a href="/">全部留言 <span class="sr-only">(current)</span></a></li>
+                <% if(login){%>
+                <li <%if(active=="myMessage"){%>class="active"<%}%>><a href="/myMessage">我的留言 <span class="sr-only">(current)</span></a></li>
+                <li <%if(active=="memos"){%>class="active"<%}%>><a href="/memos">备忘录<span class="sr-only">(current)</span></a></li>
+                <%}%>
+                <li <%if(active=="list"){%>class="active"<%}%>><a href="/list">成员列表</a></li>
+            </ul>
+            <% if(!login){%>
+            <ul class="nav navbar-nav navbar-right">
+                <li <%if(active=="login"){%>class="active"<%}%>><a href="/">登录</a></li>
+                <li <%if(active=="register"){%>class="active"<%}%>><a href="/register">注册</a></li>
+            </ul>
+            <%}else{%>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/personal"><%=username%></a></li>
+                <li><a href="/exit">退出</a></li>
+            </ul>
+            <%}%>
+        </div><!--/.navbar-collapse -->
+    </div>
+</nav>

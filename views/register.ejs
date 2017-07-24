@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body{margin-top: 200px}
+    </style>
+</head>
+<body>
+<% include header.ejs%>
+
+<div class="container">
+    <h1>注册账号：</h1>
+    <form>
+        <div class="form-group">
+            <label for="name">用户名</label>
+            <input type="text" class="form-control" name="name" id="name" placeholder="请输入用户名"><span id="name_span"></span>
+        </div>
+        <div class="form-group">
+            <label for="pwd">密码</label>
+            <input type="password" class="form-control" name="pwd" id="pwd" placeholder="请输入六位密码">
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox"> 遵守协议内容
+            </label>
+        </div>
+        <input type="button" class="btn btn-default" id="doRegister" value="注册" style="width: 50px">
+        <!--<button class="btn btn-default">注册</button>-->
+    </form>
+</div>
+<% include footer.ejs%>
+<script src="js/jquery.min.js"></script>
+<script>
+    $("#name").on("blur",function(){
+        $("#name_span").html("");
+        if($("#name").val()!=""){
+            $.ajax({
+                url:"/findName",
+                data:{"name":$("#name").val()},
+                success:function(data){
+                    $("#name_span").html("");
+                    if(data.length==0){
+                        $("#name_span").html("该用户名可以注册");
+                    }else{
+                        $("#name_span").html("该用户名已经被注册");
+                    }
+                }
+            });
+        }
+    });
+    $("#doRegister").on("click",function(){
+        if($("#name_span").html()=="该用户名可以注册"){
+            $.ajax({
+                url:"/doRegister",
+                type:"post",
+                data:{
+                    "name":$("#name").val(),
+                    "pwd":$("#pwd").val()
+                },
+                success:function(){
+                    window.location ="/";
+                }
+            })
+        }
+    });
+    $("body").keydown(function() {
+        if (event.keyCode == "13") {//keyCode=13是回车键
+                $("#doRegister").click();
+        }
+    });
+</script>
+
+</body>
+</html>

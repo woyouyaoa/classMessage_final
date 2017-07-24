@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <style>
+        body{margin-top: 150px;font-size: 16px;}
+        .name{font-size: 30px}
+    </style>
+</head>
+<body>
+<% include header.ejs%>
+
+<div class="container">
+    <div class="row">
+        <img src="<%=avatar%>" class="img-circle">
+        <p class="name"><%=username%>的留言</p>
+    </div>
+    <div class="row">
+        <%for(var i=0;i<result.length;i++){%>
+        <div class="col-md-12" style="border-bottom: 1px solid gray;padding: 14px 0;">
+            <p><%=result[i].word%></p>
+            <p ><%=result[i].time%></p>
+        </div>
+        <%}%>
+    </div>
+</div>
+<% include footer.ejs%>
+</body>
+</html>
